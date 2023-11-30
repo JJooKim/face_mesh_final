@@ -141,7 +141,7 @@ def detect_single(image):
     # draw
     image_show = draw_face(padded, bboxes_decoded, landmarks, scores, confidence=True)
     lip_coords = []
-    print(mesh_landmark_inverse)
+    print(mesh_landmarks_inverse)
     for i, mesh_landmark_inverse in enumerate(mesh_landmarks_inverse):
         # print(mesh_landmark_inverse.shape)
         # print(i)
