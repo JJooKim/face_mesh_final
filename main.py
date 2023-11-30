@@ -40,6 +40,59 @@ pose_stabilizers = [Stabilizer(
     cov_measure=2) for _ in range(6)]
 
 
+###############################################
+
+
+import torch
+from torch import nn
+
+batch_size = 4
+window_size = 12  ## fps 랑 동일해야 할듯
+input_size = 120
+hidden_size = 64
+output_size = 1
+num_layers = 1
+learning_rate = 0.01
+num_epochs = 20
+
+
+class SimpleRNN(nn.Module):
+    def __init__(self, input_size, hidden_size, output_size, num_layers):
+        super(SimpleRNN, self).__init__()
+        self.rnn = nn.LSTM(input_size, hidden_size, num_layers, batch_first=True)
+        self.fc = nn.Linear(hidden_size, output_size)
+        self.sigmoid = nn.Sigmoid()
+
+    def forward(self, x):
+        out, _ = self.rnn(x)
+        out = self.fc(out[:, -1, :])  # Take the output from the last time step
+        out = self.sigmoid(out)
+        return out
+
+# Instantiate the model
+detect_model = SimpleRNN(input_size, hidden_size, output_size, num_layers)
+
+
+detect_model_state_dict = torch.load("./model_state_dict.pt")
+detect_model.load_state_dict(detect_model_state_dict)
+###########################################################
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # detect single frame
 def detect_single(image):
     # pad image
