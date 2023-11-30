@@ -176,7 +176,7 @@ while True:
 
     with torch.no_grad():
         detect_model.eval()
-        inputs = torch.Tensor(torch.randn(19,120))
+        inputs = torch.Tensor(torch.randn(19,120)).unsqueeze(0)
         outputs = detect_model(inputs)
         print(outputs)
 
