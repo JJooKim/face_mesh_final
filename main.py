@@ -169,14 +169,14 @@ while True:
     # detect single
     image_show, lip_coords = detect_single(image)
 
-    current_frame = lip_coords[0].reshape(1,120)
-    new_pred_frame = np.abs(current_frame - recent_frame)
-    pred_frames = np.vstack((pred_frames[1:], new_pred_frame))
-    recent_frame = current_frame 
+    # current_frame = lip_coords[0].reshape(1,120)
+    # new_pred_frame = np.abs(current_frame - recent_frame)
+    # pred_frames = np.vstack((pred_frames[1:], new_pred_frame))
+    # recent_frame = current_frame 
 
     with torch.no_grad():
         detect_model.eval()
-        inputs = torch.Tensor(pred_frames)
+        inputs = torch.Tensor(torch.randn(19,120))
         outputs = detect_model(inputs)
         print(outputs)
 
