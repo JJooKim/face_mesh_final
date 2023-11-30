@@ -141,7 +141,7 @@ def detect_single(image):
     # draw
     image_show = draw_face(padded, bboxes_decoded, landmarks, scores, confidence=True)
     lip_coords = []
-    print(mesh_landmarks_inverse)
+    #print(mesh_landmarks_inverse)
     for i, mesh_landmark_inverse in enumerate(mesh_landmarks_inverse):
         # print(mesh_landmark_inverse.shape)
         # print(i)
@@ -175,12 +175,12 @@ while True:
     # pred_frames = np.vstack((pred_frames[1:], new_pred_frame))
     # recent_frame = current_frame 
 
-    with torch.no_grad():
-        detect_model.eval()
-        inputs = torch.Tensor(torch.randn(19,120)).unsqueeze(0)
-        print(inputs.shape)
-        outputs = detect_model(inputs)
-        print(outputs)
+    # with torch.no_grad():
+    #     detect_model.eval()
+    #     inputs = torch.Tensor(torch.randn(19,120)).unsqueeze(0)
+    #     print(inputs.shape)
+    #     outputs = detect_model(inputs)
+    #     print(outputs)
 
 
     result = cv2.cvtColor(image_show, cv2.COLOR_RGB2BGR)
